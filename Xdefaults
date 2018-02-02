@@ -1,0 +1,45 @@
+URxvt.foreground:White
+URxvt.background:Black
+URxvt.transparent:True
+URxvt.shading:15
+URxvt.font: xft:DejaVu Sans Mono:size=9:antialias=true:hinting=true
+URxvt.letterSpace: -1
+URxvt.scrollColor:#484848
+URxvt.troughColor:#DDDDDD
+URxvt.scrollBar_right:True
+URxvt.saveLines:2048
+URxvt.cursorUnderline: False
+URxvt.cursorBlink: False
+URxvt.scrollstyle: plain
+# Next two lines are to enable paste with C-S-v
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.iso14755: False
+
+# Enable clickable URLs (to open in firefox)
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.colorUL: #4682B4
+
+# Don't scroll term in LESS, VIM etc
+URxvt.secondaryScreen: True
+URxvt.secondaryScroll: False
+
+# Change colors
+*color0: black
+*color1: red3
+*color2: green3
+*color3: yellow3
+*color4: blue2
+*color5: magenta3
+*color6: cyan3
+*color7: gray90
+*color8: grey90
+*color9: red
+*color10: green
+*color11: yellow
+*color12: #0060FF
+*color13: #FF30FF
+*color14: cyan
+*color15: white
