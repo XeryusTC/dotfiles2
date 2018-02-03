@@ -1,5 +1,69 @@
 ---
 - hosts: all
+  vars:
+      i3_autostart: exec feh --bg-tile wallpapers/t3_6rqst0.jpeg
+      i3_app_settings: for_window[class="Steam" title="Friends"] \
+                       floating enable
+      i3_workspace: |
+        set $mon-left  DP-0
+        set $mon-right DVI-I-1
+        # Assign workspaces to the right monitor
+        workspace $WSbrowser output $mon-right
+        workspace $WSmail    output $mon-right
+        workspace $WSxchat   output $mon-left
+        workspace $WSsteam   output $mon-left
+        workspace $WSmusic   output $mon-left
+        # Assign workspaces to monitors (1-5 go on the left, 6-10 on the right)
+        workspace  1 output $mon-right
+        workspace  2 output $mon-right
+        workspace  3 output $mon-right
+        workspace  4 output $mon-right
+        workspace  5 output $mon-right
+        workspace  6 output $mon-left
+        workspace  7 output $mon-left
+        workspace  8 output $mon-left
+        workspace  9 output $mon-left
+        workspace 10 output $mon-left
+      i3_statusbar: |
+        bar {
+            colors {
+                background $back-inact
+                statusline $text
+                separator  $bor-in
+                # selectors        border      background  text
+                focused_workspace  $background $background $text
+                active_workspace   $background $background $t-in
+                inactive_workspace $back-inact $back-inact $t-in
+                urgent_workspace   $back-urgen $back-urgen $t-ur
+            }
+            position top
+            tray_output primary
+            strip_workspace_numbers yes
+            output $mon-right
+        }
+
+        bar {
+            colors {
+                background $back-inact
+                statusline $text
+                separator  $bor-in
+                # selectors        border      background  text
+                focused_workspace  $background $background $text
+                active_workspace   $background $background $t-in
+                inactive_workspace $back-inact $back-inact $t-in
+                urgent_workspace   $back-urgen $back-urgen $t-ur
+            }
+            position top
+            status_command i3status -c ~/.i3/i3status.conf
+            tray_output primary
+            strip_workspace_numbers yes
+            output $mon-left
+        }
+      i3_keybinds: |
+        # Adjust volume
+        bindcode 121 exec amixer set Master toggle
+        bindcode 122 exec amixer set Master 5%-
+        bindcode 123 exec amixer set Master 5%+
   roles:
       - common
       - i3wm

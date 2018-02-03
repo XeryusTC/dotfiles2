@@ -1,0 +1,36 @@
+---
+- name: Install i3
+  become: yes
+  apt:
+      name: "{{ item }}"
+  with_items:
+      - feh
+      - i3
+      - imagemagick
+      - scrot
+      - suckless-tools
+      - xautolock
+      - xclip
+- name: Create i3 config directory
+  file:
+      path: ~/.i3
+      state: directory
+      mode: 0700
+- name: Copy i3 config
+  template:
+      src: templates/config.j2
+      dest: ~/.i3/config
+      mode: 0600
+- name: Copy i3 statusbar config
+  copy:
+      src: i3/armadillo-i3status.conf
+      dest: ~/.i3/i3status.conf
+      mode: 0600
+- name: Copy other i3 utilities
+  copy:
+      src: "i3/{{ item }}"
+      dest: "~/.i3/{{ item }}"
+      mode: 0600
+  with_items:
+      - exit.sh
+      - lock.sh
