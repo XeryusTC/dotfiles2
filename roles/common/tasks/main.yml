@@ -42,8 +42,24 @@
   become: yes
   apt:
       deb: https://spideroak.com/release/spideroak/deb_x64
+- name: Check if SpiderOak is already set up
+  stat:
+      path: ~/.config/SpiderOakONE
+  register: spideroak_installed
+- name: Create SpiderOak login config
+  template:
+      src: templates/spideroak.json.j2
+      dest: /tmp/spideroak.json
+      mode: 0600
+  when: not spideroak_installed.stat.isdir
 - name: Log in to SpiderOak
-  command: !vault SpiderOakONE --setup=vault/spideroak.json
+  command: SpiderOakONE --setup=/tmp/spideroak.json
+  args:
+      creates: ~/.config/SpiderOakONE
+- name: Remove SpiderOak login config
+  file:
+      name: /tmp/spideroak.json
+      state: absent
 - name: Install pyenv
   git:
       depth: 10
