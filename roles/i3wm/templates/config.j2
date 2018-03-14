@@ -23,7 +23,6 @@
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 font pango:Monospace 9
-exec xrandr --dpi 96
 
 ####################
 #      COLOURS     #
@@ -58,7 +57,6 @@ exec xautolock -time 10 -locker '~/.i3/lock.sh' &
 ####################
 {{ i3_autostart }}
 exec redshift
-exec xchat
 exec thunderbird
 exec --no-startup-id SpiderOakONE
 exec firefox

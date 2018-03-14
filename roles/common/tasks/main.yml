@@ -51,7 +51,7 @@
       src: templates/spideroak.json.j2
       dest: /tmp/spideroak.json
       mode: 0600
-  when: not spideroak_installed.stat.isdir
+  when: not spideroak_installed
 - name: Log in to SpiderOak
   command: SpiderOakONE --setup=/tmp/spideroak.json
   args:
@@ -74,6 +74,10 @@
   shell: curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
   args:
       creates: ~/.cargo
+- name: Install NVM
+  shell: curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+  args:
+      creates: ~/.nvm
 - name: Setup bashrc
   copy:
       src: bashrc

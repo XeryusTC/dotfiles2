@@ -1,0 +1,69 @@
+---
+- hosts: all
+  vars:
+      i3_autostart: |
+          xrandr --output DP-1 --left-of eDP-1 --scale 0.6x0.6
+          #exec feh --bg-tile wallpapers/t3_6rqst0.jpeg
+      i3_app_settings: ""
+      i3_workspace: |
+        set $mon-left  DP-1
+        set $mon-right eDP-1
+        # Assign workspaces to the right monitor
+        workspace $WSbrowser output $mon-left
+        workspace $WSmail    output $mon-right
+        workspace $WSmusic   output $mon-left
+        # Assign workspaces to monitors (1-5 go on the left, 6-10 on the right)
+        workspace  1 output $mon-left
+        workspace  2 output $mon-left
+        workspace  3 output $mon-left
+        workspace  4 output $mon-left
+        workspace  5 output $mon-left
+        workspace  6 output $mon-right
+        workspace  7 output $mon-right
+        workspace  8 output $mon-right
+        workspace  9 output $mon-right
+        workspace 10 output $mon-right
+      i3_statusbar: |
+        bar {
+            colors {
+                background $back-inact
+                statusline $text
+                separator  $bor-in
+                # selectors        border      background  text
+                focused_workspace  $background $background $text
+                active_workspace   $background $background $t-in
+                inactive_workspace $back-inact $back-inact $t-in
+                urgent_workspace   $back-urgen $back-urgen $t-ur
+            }
+            position top
+            tray_output primary
+            strip_workspace_numbers yes
+            output $mon-right
+        }
+
+        bar {
+            colors {
+                background $back-inact
+                statusline $text
+                separator  $bor-in
+                # selectors        border      background  text
+                focused_workspace  $background $background $text
+                active_workspace   $background $background $t-in
+                inactive_workspace $back-inact $back-inact $t-in
+                urgent_workspace   $back-urgen $back-urgen $t-ur
+            }
+            position top
+            status_command i3status -c ~/.i3/i3status.conf
+            tray_output primary
+            strip_workspace_numbers yes
+            output $mon-left
+        }
+      i3_keybinds: |
+        # Adjust volume
+        bindcode 121 exec amixer set Master toggle
+        bindcode 122 exec amixer set Master 5%-
+        bindcode 123 exec amixer set Master 5%+
+      spideroak_devicename: badger
+  roles:
+      - common
+      - i3wm
