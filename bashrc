@@ -3,10 +3,7 @@
 # for examples
 
 # If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+[[ $- != *i* ]] && return
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -31,9 +28,6 @@ shopt -s checkwinsize
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -80,11 +74,11 @@ fi
 
 if [ "$color_prompt" = yes ]; then
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    PS1="$HC$FYEL[\t] $RS${debian_chroot:+($debian_chroot)}$HC$FGRN\u$FWHT@$FGRN\h$FWHT:$FBLE\w$RS\n\$ "
+    PS1="$HC$FYEL[\t] $RS$HC$FGRN\u$FWHT@$FGRN\h$FWHT:$FBLE\w$RS\n\$ "
     PS2="$RS> "
 else
     # PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1='[\t] ${debian_chroot:+($debian_chroot)}\u@\h:\w\n\$ '
+    PS1='[\t] \u@\h:\w\n\$ '
     PS2='> '
 fi
 unset color_prompt force_color_prompt
@@ -92,7 +86,7 @@ unset color_prompt force_color_prompt
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    PS1="\[\e]0;\u@\h: \w\a\]$PS1"
     ;;
 *)
     ;;

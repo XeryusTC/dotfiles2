@@ -10,8 +10,8 @@
         # Assign workspaces to the right monitor
         workspace $WSbrowser output $mon-right
         workspace $WSmail    output $mon-right
-        workspace $WSxchat   output $mon-left
-        workspace $WSsteam   output $mon-left
+        #workspace $WSxchat   output $mon-left
+        #workspace $WSsteam   output $mon-left
         workspace $WSmusic   output $mon-left
         # Assign workspaces to monitors (1-5 go on the left, 6-10 on the right)
         workspace  1 output $mon-right
@@ -67,4 +67,5 @@
       spideroak_devicename: armadillo
   roles:
       - common
-      - i3wm
+        #- i3wm
+      - sway

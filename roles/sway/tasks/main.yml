@@ -1,0 +1,15 @@
+---
+- name: Install sway
+  become: yes
+  pacman:
+      name: sway feh imagemagick scrot i3status dmenu
+- name: Create sway config directory
+  file:
+      state: directory
+      name: ~/.config/sway
+      mode: 0700
+- name: Copy sway config
+  template:
+      src: templates/config.j2
+      dest: ~/.config/sway/config
+      mode: 0600
