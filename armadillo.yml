@@ -1,11 +1,15 @@
 ---
 - hosts: all
+  vars_prompt:
+      name: "spideroak_password"
+      prompt: "SpiderOak password"
+      private: yes
   vars:
       i3_autostart: exec feh --bg-tile wallpapers/t3_6rqst0.jpeg
       i3_app_settings: for_window[class="Steam" title="Friends"] \
                        floating enable
       i3_workspace: |
-        set $mon-left  DP-0
+        set $mon-left  DP-1
         set $mon-right DVI-I-1
         # Assign workspaces to the right monitor
         workspace $WSbrowser output $mon-right
@@ -67,5 +71,5 @@
       spideroak_devicename: armadillo
   roles:
       - common
-        #- i3wm
-      - sway
+      - xorg
+      - i3wm

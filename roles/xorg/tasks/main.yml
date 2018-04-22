@@ -1,0 +1,17 @@
+---
+- name: Install X
+  become: yes
+  pacman:
+      name: xorg-server xorg-xrandr xorg-xev xorg-xbacklight xorg-xprop xf86-video-nouveau lightdm lightdm-gtk-greeter mesa xclip
+- name: Copy X nouveau configuration
+  become: yes
+  template:
+      src: templates/20-nouveau.conf.j2
+      dest: /etc/X11/xorg.conf.d/20-nouveau.conf
+      mode: 0644
+- name: Copy lightdm configuration
+  become: yes
+  template:
+      src: templates/lightdm.conf.j2
+      dest: /etc/lightdm/lightdm.conf
+      mode: 0644
